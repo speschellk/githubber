@@ -1,4 +1,8 @@
 ## NPM ##
 node_modules/
 
+node_modules/
+npm-debug.log
+
 ## Compiled files ##
+public/
