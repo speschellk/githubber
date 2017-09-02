@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Repo = ({ repo: { name, stargazers_count, contributor } }) => (
+const Repo = ({ repo, handleRepoListTitleClick }) => (
   <div className="repo media">
-    {/* <div className="media-left media-middle">
-      <img className="media-object" src={video.snippet.thumbnails.default.url} alt="" />
-    </div> */}
+    <div className="media-left">
+      <img className="media-object" src='assets/star.png' height='20px' />
+      {repo.stargazers_count}
+    </div>
     <div className="media-body">
-      <div className="repo-title">Repo: {name}</div>
+      <div className="repo-title" onClick={() => handleRepoListTitleClick(repo)}>{repo.name}</div>
       <div className="repo-detail">
-        Stars:{stargazers_count}
-        Top contributor: {contributor}
+        Top contributor: {repo.contributor}
       </div>
     </div>
   </div>
