@@ -18,14 +18,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // call searchRepos
     this.searchRepos();
   }
 
   render() {
     return (
-      <div className='repolist-container'>
-        <RepoList repos={this.state.repoList}/>
+      <div className="title">
+        Git of Thrones
+        <div className="col-md-5">
+          <RepoList repos={this.state.repoList} />
+        </div>
       </div>
     );
   }
