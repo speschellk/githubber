@@ -15,13 +15,15 @@ class App extends React.Component {
 
     this.searchRepos = this.searchRepos.bind(this);
     this.handleRepoListTitleClick = this.handleRepoListTitleClick.bind(this);
+    this.handleSearchClick = this.handleSearchClick.bind(this)
   }
 
   searchRepos(query) {
-    searchGitHub(query, (repoList) => {
+    console.log('query is', query)
+    searchGitHub(query, (repos) => {
       this.setState({
-        repoList,
-        currentRepo: repoList[0]
+        repoList: repos,
+        currentRepo: repos[0]
       });
     });
   }
@@ -32,6 +34,10 @@ class App extends React.Component {
     });
   }
 
+  handleSearchClick(query) {
+    this.searchRepos(query);
+  }
+
   componentDidMount() {
     this.searchRepos();
   }
@@ -40,16 +46,16 @@ class App extends React.Component {
     return (
       <div className="nav-container">
         <Nav
-          handleSearchInputChange={this.searchRepos}
+          handleSearchClick={this.handleSearchClick}
         />
-        <div className="title col-md-5">
+        <div className="title col-md-12">
           <h2>GitHubber</h2>
-          <p>What's trending on GitHub? Here's a look at the 100 most-starred repositories, as well as their top contributors. Use the search bar to find trending repositories by topic.</p>
+          <p>What's trending on GitHub? Here's a look at the most-starred repos of all time, along with their top contributors. Click on a repository title to read more about it. Looking for something more specific? Use the search bar to see trending repositories by topic.</p>
         </div>
-        <div className="repo-list-container col-md-5">
+        <div className="repo-list-container col-md-6">
           <RepoList repos={this.state.repoList} handleRepoListTitleClick={this.handleRepoListTitleClick} />
         </div>
-        <div className="repo-viewer-container col-md-7" >
+        <div className="repo-viewer-container col-md-6" >
           <RepoViewer repo={this.state.currentRepo} />
         </div>
       </div>
