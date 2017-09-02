@@ -13,6 +13,7 @@ const RepoViewer = ({ repo }) => (
       <p className="repo-description">{repo.description}</p>
       <p className="repo-contributor">Top contributor {repo.contributor} has made {repo.contributions} contributions.</p>
       <p className="language">Written in {repo.language}</p>
+      <a className="repo-url" href={repo.html_url} target="blank">Visit the repo</a>
     </div>
   </div>
 );
