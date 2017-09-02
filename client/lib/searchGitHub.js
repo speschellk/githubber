@@ -10,11 +10,11 @@ const searchGitHub = (query = 'stars:>=500', callback) => {
       page:'1'
     })
     .then(({ body: { items } }) => {
-      console.log('items', items)
       items.forEach((item) => {
         request.get(item.contributors_url)
           .then(({ body }) => {
             item.contributor = body[0].login;
+            item.contributions = body[0].contributions;
           })
           .then(() => {
             callback && callback(items);
