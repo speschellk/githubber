@@ -3,16 +3,22 @@ import request from 'superagent';
 const searchGitHub = (callback) => {
   request.get('https://api.github.com/search/repositories')
     .query({
-      q:'cats',
+      q:'stars:>=500',
       sort:'stars',
       order:'desc',
-      per_page:'100',
+      per_page:'3',
       page:'1'
     })
     .then(({ body: { items } }) => {
-      console.log('search produced:', items)
-      // top contributor: items[0].collaborators_url[0]
-      callback && callback(items);
+      items.forEach((item) => {
+        request.get(item.contributors_url)
+          .then(({ body }) => {
+            item.contributor = body[0].login;
+          })
+          .then(() => {
+            callback && callback(items);
+          });
+      })
     })
     .catch((err) => {
       console.error('GitHub request error:', err)
