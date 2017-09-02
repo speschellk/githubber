@@ -1,16 +1,21 @@
 import request from 'superagent';
 
 const searchGitHub = (callback) => {
-  request.get() // API endpoint
+  request.get('https://api.github.com/search/repositories')
     .query({
-      // query params
+      q:'cats',
+      sort:'stars',
+      order:'desc',
+      per_page:'100',
+      page:'1'
     })
-    .then(() => {
-      // if callback passed in, call it with results
-      callback && callback();
+    .then(({ body: { items } }) => {
+      console.log('search produced:', items)
+      // top contributor: items[0].collaborators_url[0]
+      callback && callback(items);
     })
     .catch((err) => {
-      // handle error
+      console.error('GitHub request error:', err)
     });
 };
 
