@@ -19,7 +19,6 @@ class App extends React.Component {
   }
 
   searchRepos(query) {
-    console.log('query is', query)
     searchGitHub(query, (repos) => {
       this.setState({
         repoList: repos,
