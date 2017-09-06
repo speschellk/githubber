@@ -8,4 +8,4 @@ npm-debug.log
 public/bundle.js
 
 ## GitHub credentials
-config/github.config.js
+client/config/github.config.js
