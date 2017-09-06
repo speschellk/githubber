@@ -6,3 +6,6 @@ npm-debug.log
 
 ## Compiled files ##
 public/bundle.js
+
+## GitHub credentials
+config/github.config.js
